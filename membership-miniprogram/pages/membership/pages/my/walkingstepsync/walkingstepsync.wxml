@@ -1,0 +1,73 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 页面第一部分 同步按钮 -->
+<view class="weui-panel">
+  <view class="weui-panel__bd">
+    <view class="weui-media-box weui-media-box_text">
+      <view class="weui-media-box__title weui-media-box__title_in-text">微信运动步数同步</view>
+      <view class="weui-media-box__desc">请点击同步按钮开始同步微信运动数据</view>
+    </view>
+    <view class="weui-cell weui-cell_hide_line">
+      <view class="weui-cell__bd">
+        <button type="primary" bindtap='onSyncButtonClick'>同步</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 页面第二部分 同步成功结果 -->
+<view class="weui-panel" wx:if="{{ weRunToPointData.length > 0 }}">
+  <view class="weui-panel__hd">
+    同步成功
+  </view>
+  <view class="weui-form-preview__hd">
+    <view class="weui-form-preview__item">
+      <view class="weui-form-preview__label">共同步积分</view>
+      <view class="weui-form-preview__value_in-hd line-red">+{{addPointNum}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 页面第三部分 同步详情列表 -->
+<view wx:if="{{ weRunToPointData.length > 0 }}">
+  <view class="weui-cells__title">详情</view>
+  <block wx:for="{{weRunToPointData}}" wx:key="item.time">
+
+    <!-- 一条同步详情记录 -->
+    <view class="weui-form-preview">
+      <view class="weui-form-preview__hd" wx:if="{{item.changePoints > 0}}">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">积分</view>
+          <view class="weui-form-preview__value_in-hd line-red">+{{item.changePoints}}</view>
+        </view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">运动日期: </view>
+          <view class="weui-form-preview__value">{{item.time}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">运动步数: </view>
+          <view class="weui-form-preview__value">{{item.step}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">历史同步已增加积分:</view>
+          <view class="weui-form-preview__value"> {{item.step - item.changePoints}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">本次同步增加积分: </view>
+          <view class="weui-form-preview__value">{{item.changePoints}}</view>
+        </view>
+      </view>
+    </view>
+
+  </block>
+</view>
+
+<!-- 同步失败提示 -->
+<view wx:if="{{isFailed}}">
+  <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line"></view>
+    <view>微信运动数据同步失败，请稍后重试</view>
+  </view>
+</view>

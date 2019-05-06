@@ -1,0 +1,130 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 当显示积分支付结果时，隐藏主界面-->
+<view wx:if="{{!showPaySuccess && !showPayFaild}}">
+  <!-- 页面第一部分 购物车商品列表 -->
+  <view class="weui-panel weui-panel_access">
+    <!-- 顶部标题 -->
+    <view class="weui-panel__hd">
+      <view class="weui-flex">
+        <view class="weui-flex__item">
+          购物车
+        </view>
+        
+        <!-- 清空购物车图标 -->
+        <view class="weui-flex__item text-right">
+          <text class="icon-delete" bindtap='clearCart'></text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 商品列表 -->
+    <view class="weui-panel__bd">
+      <block wx:for="{{cart}}" wx:key="{{item.index}}">
+
+        <!-- 一件商品 -->
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">
+            <view class="weui-flex">
+              <!-- 商品图片 -->
+              <navigator url="../product/product?index={{item.index}}">
+                <image class="product_thumbnail_image" src="{{item.smallcoverimg}}" />
+              </navigator>
+
+              <!-- 商品信息 -->
+              <navigator url="../product/product?index={{item.index}}" class="weui-flex__item margin-lr-sm">
+                <view class="text-lg">{{item.bookname}}</view>
+                <view class="text-sm">
+                  <block wx:if="{{isMembershipExpired && discount < 1}}">
+                    <view class="text-red">
+                      折扣价 p{{item.discountedPrice}}
+                    </view>
+                    <view>
+                      <text class="line_through"> 原价 p{{item.price}} </text>
+                    </view>
+                  </block>
+                  <block wx:if="{{!isMembershipExpired}}">
+                    <view class="text-red">
+                      小M卡专享价 p{{ item.discountedPrice }}
+                    </view>
+                    <view>
+                      <text class="line_through"> 原价 p{{item.price}} </text>
+                    </view>
+                  </block>
+                  <block wx:if="{{isMembershipExpired && discount == 1}}">
+                    <view class="text-red">
+                      限时特价 p{{item.discountedPrice}}
+                    </view>
+                  </block>
+                </view>
+              </navigator>
+
+              <!-- 删除商品图标 -->
+              <view class="text-xs">
+                <text class="icon-delete" bindtap='deleteProductFromCart' data-item="{{item}}"></text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </block>
+    </view>
+  </view>
+
+  <!-- 页面第二部分 底部购买菜单 -->
+  <view wx:if="{{cart.length > 0}}" class="cu-bar bg-white tabbar border shop bottom_pay_button">
+    <view class="action">
+      <view>总计</view>
+      <text class="text-red">p{{totalPrice}}</text>
+    </view>
+    <view class="action">
+      <view>折扣</view>
+      <text class="text-red">p{{totalPrice - totalDiscountedPrice}}</text>
+    </view>
+    <view class="action">
+      <view>实际支付</view>
+      <text class="text-red">p{{totalDiscountedPrice}}</text>
+    </view>
+    <form bindsubmit='onPayButtonClick' report-submit="true" class="bg-red submit">
+      <button form-type="submit">结算</button>
+    </form>
+  </view>
+</view>
+
+<!-- 支付成功提示界面 -->
+<view wx:if="{{showPaySuccess}}" class="weui-msg bg-white padding">
+  <view class="weui-msg__icon-area">
+    <icon type="success" size="93"></icon>
+  </view>
+  <view class="weui-msg__text-area">
+    <view class="weui-msg__title">支付成功</view>
+    <view class="weui-msg__desc">你已使用积分换购商品
+    </view>
+  </view>
+  <view class="weui-msg__opr-area">
+    <view class="weui-btn-area">
+      <navigator open-type='switchTab' url="../../my/index/index">
+        <button class="weui-btn" type="primary">查看订单</button>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 支付失败提示界面 -->
+<view wx:if="{{showPayFaild}}" class="weui-msg bg-white padding">
+  <view class="weui-msg__icon-area">
+    <icon type="warn" size="93"></icon>
+  </view>
+  <view class="weui-msg__text-area">
+    <view class="weui-msg__title">支付失败</view>
+    <view class="weui-msg__desc">如有疑问请联系客服
+    </view>
+  </view>
+  <view class="weui-msg__opr-area">
+    <view class="weui-btn-area">
+      <navigator open-type='redirect' url="../../shop/cart/cart">
+        <button class="weui-btn" type="primary">返回</button>
+      </navigator>
+    </view>
+  </view>
+</view>

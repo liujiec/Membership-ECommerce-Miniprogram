@@ -1,0 +1,5 @@
+/* 设置列表高度超过屏幕高度，确保列表能刷新 */
+.point_change {
+  min-height: 1500rpx;
+}
+

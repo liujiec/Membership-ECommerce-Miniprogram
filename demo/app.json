@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/01_flex_tabbar/01_flex_tabbar",
+    "pages/02_navbar/02_navbar",
+    "pages/03_swiper/03_swiper",
+    "pages/04_cloud_db/04_cloud_db",
+    "pages/05_list_template/05_list_template",
+    "pages/06_form/06_form",
+    "pages/07_form_submit/07_form_submit"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "Demo",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

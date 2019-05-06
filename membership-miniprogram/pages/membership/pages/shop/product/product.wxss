@@ -1,0 +1,30 @@
+/* 瀑布流底部避免被支付按钮遮盖 */
+.water_flow {
+  padding-bottom: 100rpx;
+}
+
+/* 文字删除线样式 */
+.line_through {
+  text-decoration: line-through;
+}
+
+/* 底部支付按钮样式 */
+.bottom_pay_button {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0px;
+  width: 100%;
+}
+
+button {
+  color: white;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  position: inherit;
+}
+
+button::after {
+  border: 0;
+}

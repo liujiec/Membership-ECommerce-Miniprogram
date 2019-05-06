@@ -1,0 +1,21 @@
+/* 使用colorui和weui */
+@import "style/colorui/main.wxss";
+@import "style/colorui/icon.wxss";
+@import 'style/weui/weui.wxss';
+
+/* 设置页面背景、默认字体字号 */
+page {
+  background-color: #f8f8f8;
+  font-size: 16px;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.weui-badge_after {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.weui-badge_space {
+  margin-right: 5px;
+}
+

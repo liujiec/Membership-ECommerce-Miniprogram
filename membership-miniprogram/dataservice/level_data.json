@@ -1,0 +1,157 @@
+
+  {
+  id: 1,
+  title: "奶嘴",
+  isSelect: false,
+  minGrowthValue: 0,
+  maxGrowthValue: 19900,
+  icon: "grey",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      }
+    ]
+  }
+  {
+  id: 2,
+  title: "幼稚园",
+  isSelect: false,
+  minGrowthValue: 20000,
+  maxGrowthValue: 49900,
+  icon: "brown",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "98折", discount: 0.98
+      },
+      { name: "会费立减", desc: "5千积分", discount: 5000
+      }
+    ]
+  }
+  {
+  id: 3,
+  title: "学前班",
+  isSelect: false,
+  minGrowthValue: 50000,
+  maxGrowthValue: 99900,
+  icon: "pink",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "96折", discount: 0.96
+      },
+      { name: "会费立减", desc: "5千积分", discount: 5000
+      }
+    ]
+  }
+  {
+  id: 4,
+  title: "小学生",
+  isSelect: false,
+  minGrowthValue: 100000,
+  maxGrowthValue: 199900,
+  icon: "mauve",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "94折", discount: 0.94
+      },
+      { name: "会费立减", desc: "5千积分", discount: 5000
+      }
+    ]
+  }
+  {
+  id: 5,
+  title: "初中生",
+  isSelect: false,
+  minGrowthValue: 200000,
+  maxGrowthValue: 499900,
+  icon: "purple",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "92折", discount: 0.92
+      },
+      { name: "会费立减", desc: "5千积分", discount: 5000
+      }
+    ]
+  }
+  {
+  id: 6,
+  title: "高中生",
+  isSelect: false,
+  minGrowthValue: 500000,
+  maxGrowthValue: 999900,
+  icon: "blue",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "9折", discount: 0.9
+      },
+      { name: "会费立减", desc: "5千积分", discount: 5000
+      }
+    ]
+  }
+  {
+  id: 7,
+  title: "大学生",
+  isSelect: false,
+  minGrowthValue: 1000000,
+  maxGrowthValue: 1999900,
+  icon: "cyan",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "87折", discount: 0.87
+      },
+      { name: "会费立减", desc: "1万积分", discount: 10000
+      }
+    ]
+  }
+  {
+  id: 8,
+  title: "研究生",
+  isSelect: false,
+  minGrowthValue: 2000000,
+  maxGrowthValue: 4999900,
+  icon: "green",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "84折", discount: 0.84
+      },
+      { name: "会费立减", desc: "1万积分", discount: 10000
+      }
+    ]
+  }
+  {
+  id: 9,
+  title: "博士生",
+  isSelect: false,
+  minGrowthValue: 5000000,
+  maxGrowthValue: 9999900,
+  icon: "yellow",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "8折", discount: 0.8
+      },
+      { name: "会费立减", desc: "1万积分", discount: 10000
+      }
+    ]
+  }
+  {
+  id: 10,
+  title: "博士后",
+  isSelect: false,
+  minGrowthValue: 10000000,
+  maxGrowthValue: -1,
+  icon: "orange",
+  bonus: [
+      { name: "创作笔记", desc: ""
+      },
+      { name: "优享折扣", desc: "75折", discount: 0.75
+      },
+      { name: "会费立减", desc: "1万积分", discount: 10000
+      }
+    ]
+  }

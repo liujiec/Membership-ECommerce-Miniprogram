@@ -1,0 +1,162 @@
+<view class="page">
+  <view class=" page__hd head">
+    <view class="placeholder">头部图片</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{error}}</view>
+    <form bindsubmit="submitForm">
+      <!-- input -->
+      <view class="weui-cells__title">基本信息（文本框-input）</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input {{ errorMap['name']?'weui-cell_warn':'' }}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">姓名</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input name="name" value="{{ name }}" class="weui-input" type="text" maxlength='4' placeholder="请输入2-4个字的姓名" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input {{ errorMap['email']?'weui-cell_warn':'' }}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">邮箱</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input name="email" value="{{ email }}" class="weui-input" type="text" placeholder="请输入邮箱" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input {{ errorMap['tel']?'weui-cell_warn':'' }}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">手机号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input name="tel" value="{{ tel }}" class="weui-input" type="number" maxlength='11' placeholder="请输入手机号" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input {{ errorMap['idcard']?'weui-cell_warn':'' }}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">身份证号码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input name="idcard" value="{{ idcard }}" class="weui-input" type="idcard" maxlength='18' placeholder="请输入身份证号码" />
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells__title">密码验证（文本框-input）</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input {{ errorMap['password']?'weui-cell_warn':'' }}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">新密码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input name="password" value="{{ password }}"  class="weui-input" type="text" maxlength='15' placeholder="6到15位" password="true" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input {{ errorMap['confirmPassword']?'weui-cell_warn':'' }}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">确认密码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input name="confirmPassword" value="{{ confirmPassword }}" class="weui-input" type="text" maxlength='15' placeholder="确认密码和新密码保持一致" password="true" />
+          </view>
+        </view>
+      </view>
+
+      <!-- radio -->
+      <view class="weui-cells__title {{ errorMap['gender']?'weui-cell_warn':'' }}">性别（单选列表项-radio）</view>
+      <view class="weui-cells weui-cells_after-title">
+        <radio-group name="gender" bindchange="radioChange">
+          <label class="weui-cell weui-check__label" wx:for="{{radio}}" wx:key="value">
+            <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+            <view class="weui-cell__bd">{{item.name}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+              <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+            </view>
+          </label>
+        </radio-group>
+      </view>
+
+      <!-- checkbox -->
+      <view class="weui-cells__title {{ errorMap['skills']?'weui-cell_warn':'' }}">技能（复选列表项-checkbox）</view>
+      <view class="weui-cells weui-cells_after-title">
+        <checkbox-group name="skills" bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label" wx:for="{{checkbox}}" wx:key="value">
+            <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+            <view class="weui-cell__hd weui-check__hd_in-checkbox">
+              <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+              <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+        </checkbox-group>
+      </view>
+
+      <!-- switch -->
+      <view class="weui-cells__title">隐私（开关-switch）</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">公开个人信息</view>
+          <view class="weui-cell__ft">
+            <switch name="publicInfo" checked="{{ publicInfo }}" />
+          </view>
+        </view>
+      </view>
+
+      <!-- picker -->
+      <view class="weui-cells__title">个人信息（选择-picker）</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_select {{ errorMap['date']?'weui-cell_warn':'' }}">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">出生日期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker name="date" mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+              <view class="weui-input">{{date}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_select {{ errorMap['countryIndex']?'weui-cell_warn':'' }}">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">国籍</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker name="countryIndex" bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
+              <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+      <!-- textarea -->
+      <view class="weui-cells__title {{ errorMap['textarea']?'weui-cell_warn':'' }}">个人介绍（文本域-textarea）</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea name="textarea" value="{{ textarea }}" class="weui-textarea" maxlength='200' bindinput='bindTextareaInput' placeholder="请输入个人介绍，让更多朋友认识你" style="height: 3.3em" />
+            <view class="weui-textarea-counter">{{ inputLength }}/200</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- User Agreement  -->
+      <checkbox-group name="isAgree" bindchange="bindAgreeChange">
+        <label class="weui-agree" for="weuiAgree">
+          <view class="weui-agree__text">
+            <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+            <view class="weui-agree__checkbox-icon">
+              <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+            </view>
+            阅读并同意
+            <navigator url="" class="weui-agree__link">《相关条款》</navigator>
+          </view>
+        </label>
+      </checkbox-group>
+
+      <!-- submit button -->
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" formType="submit">确定</button>
+      </view>
+    </form>
+  </view>
+</view>

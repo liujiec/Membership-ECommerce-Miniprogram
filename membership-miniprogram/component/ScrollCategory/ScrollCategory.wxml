@@ -1,0 +1,10 @@
+<!-- 使用微信官方的scroll-view控件实现横向分类导航栏 -->
+<scroll-view scroll-x="true" class="category_tab_container">
+  <view class="category_tab_container_padd"></view>
+  <block wx:for="{{categories}}" wx:for-item="category" wx:key="{{category.id}}">
+    <view class="category_tab_item {{category.isSelect?'category_tab_item_selected':''}}" bindtap="_onCategoryItemClick" data-item="{{category}}">
+      {{category.title}}
+    </view>
+  </block>
+  <view class="category_tab_container_padd"></view>
+</scroll-view>

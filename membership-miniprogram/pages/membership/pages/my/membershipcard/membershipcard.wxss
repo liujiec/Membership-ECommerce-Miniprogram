@@ -1,0 +1,20 @@
+/* 小M卡会员卡样式 */
+.membership_card {
+  height: 300rpx;
+  width: 600rpx;
+  margin: 0 auto;
+  border-radius: 12rpx;
+}
+
+.membership_card_title {
+  height: 100rpx;
+}
+
+.membership_card_info {
+  padding-top: 70rpx;
+}
+
+.membership_join_button {
+  width: 600rpx;
+  margin: 0 auto;
+}

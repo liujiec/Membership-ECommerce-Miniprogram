@@ -1,0 +1,28 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 顶部搜索栏和分类导航栏固定在页面顶部 -->
+<view class="page_top">
+  <!-- 搜索栏 -->
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <navigator url="../search/search">
+        <view class="weui-search-bar__box">
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" disabled="true" />
+        </view>
+        <label class="weui-search-bar__label">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 分类导航栏 绑定分类点击事件-->
+  <scrollCategory id='scrollCategory' bind:categoryChangeEvent="oncategoryChangeEvent">
+  </scrollCategory>
+</view>
+<view class="page_body">
+  <!-- 瀑布流展示商品 -->
+  <waterFallView id='waterFallView'>
+  </waterFallView>
+</view>

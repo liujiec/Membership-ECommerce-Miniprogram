@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "waterFallView": "/component/WaterFallView/WaterFallView",
+    "userLockCheck": "/component/userLockCheck/userLockCheck"
+  },
+  "navigationBarTitleText": "商品详情"
+}

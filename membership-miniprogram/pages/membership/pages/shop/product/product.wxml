@@ -1,0 +1,257 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 当获取到用户与商品数据后，再显示页面 当显示积分支付结果时，隐藏主界面 当用户购买后，显示购买后界面-->
+<view wx:if="{{inited && !showPaySuccess && !showPayFaild && !isPaid}}">
+  <view class="bg-white">
+    <!-- 页面第一部分  顶部图片 -->
+    <view class="text-center">
+      <image mode="widthFix" src="{{productInfo.coverimg ? productInfo.coverimg : '' }}"></image>
+    </view>
+
+    <!-- 页面第二部分 价格 -->
+    <view class="padding-lr padding-bottom-sm">
+      <!-- 用户等级折扣价 -->
+      <block wx:if="{{isMembershipExpired && discount < 1}}">
+        <view class="weui-badge weui-badge_space">折扣价</view>
+        <view class="weui-badge_after text-xl text-red">
+          p{{discountedPrice}}
+        </view>
+        <view>
+          <text class="line_through text-sm"> 原价 p{{price}} </text>
+        </view>
+      </block>
+      <!-- 小M卡会员折扣价 -->
+      <block wx:if="{{!isMembershipExpired}}">
+        <view class="weui-badge weui-badge_space">M</view>
+        <view class="weui-badge_after">
+          小M卡会员专享价
+          <text class="text-red"> p{{ discountedPrice }}</text>
+        </view>
+        <view>
+          <text class="line_through text-sm"> 原价 p{{price}} </text>
+        </view>
+      </block>
+      <!-- 原价 -->
+      <block wx:if="{{isMembershipExpired && discount == 1}}">
+        <view class="weui-badge weui-badge_space">限时特价</view>
+        <view class="weui-badge_after text-xl text-red">
+          p{{discountedPrice}}
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 页面第三部分 小M卡会员招募 -->
+  <view wx:if="{{isMembershipExpired}}" class="weui-panel weui-panel_access">
+    <view class="weui-panel__bd">
+      <navigator url="../../my/membershipcard/membershipcard">
+        <view class="weui-cell weui-cell_access weui-cell_hide_line">
+          <view class="weui-cell__bd">
+            <view class="weui-badge weui-badge_space">M</view>
+            <view class="weui-badge_after">
+              小M卡会员专享价
+              <text class="text-lg text-red margin-left-sm">p{{ membershipPrice }}</text>
+            </view>
+            <view class="text-sm">
+              {{ '开卡仅p20000，此商品省p'+ (productInfo.price - membershipPrice) }}
+            </view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">开通会员</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 页面第四部分 商品简介 -->
+  <view class="weui-panel">
+    <!-- 商品名称 -->
+    <view class="weui-panel__hd">
+      <view class="text-xxl text-black">{{productInfo.bookname}}</view>
+      <view class="text-sm">{{productInfo.author}}</view>
+    </view>
+    <!-- 商品描述 -->
+    <view class="weui-panel__bd">
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-df">
+            <rich-text nodes="{{productInfo.desc}}"></rich-text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面第五部分 商品目录 -->
+  <view class="weui-panel">
+    <view class="weui-panel__hd text-df">商品目录</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-df text-red">
+            购买后即可查看目录
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面第六部分 商品详情 -->
+  <view class="weui-panel">
+    <view class="weui-panel__hd text-df">商品详情</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-xl padding-bottom-sm">作品特色</view>
+          <view class="text-df">
+            <rich-text nodes="{{productInfo.feature}}"></rich-text>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-xl padding-bottom-sm">作者介绍</view>
+          <view class="text-df">
+            <rich-text nodes="{{productInfo.authorinfo}}"></rich-text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+    <!-- 页面第七部分 瀑布流展示相关商品 -->
+  <view class="weui-panel">
+    <view class="weui-panel__hd">相关商品</view>
+  </view>
+  <view class="water_flow">
+    <!-- 瀑布流展示商品 -->
+    <waterFallView id='waterFallView'>
+    </waterFallView>
+  </view>
+
+  <!-- 页面第八部分 底部购买菜单 -->
+  <view class="cu-bar bg-white tabbar border shop bottom_pay_button">
+    <navigator open-type="switchTab" url="../index/index">
+      <view class="action">
+        <view class="icon-home">
+        </view>
+        首页
+      </view>
+    </navigator>
+    <navigator url="../cart/cart">
+      <view class="action">
+        <view class="icon-cart">
+          <view wx:if="{{cart.length > 0}}" class="cu-tag badge">{{cart.length}}</view>
+        </view>
+        购物车
+      </view>
+    </navigator>
+    <view bindtap='addCart' class="bg-orange submit">加入购物车</view>
+    <form bindsubmit='onPayButtonClick' report-submit="true" class="bg-red submit">
+      <button form-type="submit"><view>立即购买</view></button>
+    </form>
+  </view>
+</view>
+
+<!-- 支付成功提示界面 -->
+<view wx:if="{{showPaySuccess}}" class="weui-msg bg-white padding">
+  <view class="weui-msg__icon-area">
+    <icon type="success" size="93"></icon>
+  </view>
+  <view class="weui-msg__text-area">
+    <view class="weui-msg__title">支付成功</view>
+    <view class="weui-msg__desc">你已使用积分换购商品
+    </view>
+  </view>
+  <view class="weui-msg__opr-area">
+    <view class="weui-btn-area">
+      <navigator open-type='switchTab' url="../../my/index/index">
+        <button class="weui-btn" type="primary">查看订单</button>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 支付失败提示界面 -->
+<view wx:if="{{showPayFaild}}" class="weui-msg bg-white padding">
+  <view class="weui-msg__icon-area">
+    <icon type="warn" size="93"></icon>
+  </view>
+  <view class="weui-msg__text-area">
+    <view class="weui-msg__title">支付失败</view>
+    <view class="weui-msg__desc">如有疑问请联系客服
+    </view>
+  </view>
+  <view class="weui-msg__opr-area">
+    <view class="weui-btn-area">
+      <navigator open-type='redirect' url="../../shop/product/product?index={{productInfo.index}}">
+        <button class="weui-btn" type="primary">返回</button>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 当用户购买后，显示购买后界面 -->
+<view wx:if="{{isPaid}}">
+  <view class="bg-white">
+    <!-- 顶部图片 -->
+    <view class="text-center">
+      <image mode="widthFix" src="{{productInfo.coverimg ? productInfo.coverimg : '' }}"></image>
+    </view>
+  </view>
+  <view class="weui-panel">
+    <!-- 商品名称 -->
+    <view class="weui-panel__hd">
+      <view class="text-xxl text-black">{{productInfo.bookname}}</view>
+      <view class="text-sm">{{productInfo.author}}</view>
+    </view>
+    <!-- 商品描述 -->
+    <view class="weui-panel__bd">
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-df">
+            <rich-text nodes="{{productInfo.desc}}"></rich-text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 商品目录 -->
+  <view class="weui-panel">
+    <view class="weui-panel__hd text-df">商品目录</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-df">
+            <block wx:for="{{productInfo.catelog}}" wx:key="item.name">
+              <navigator url="">
+                <view class="margin-bottom-sm">{{item.name}}</view>
+              </navigator>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 商品详情 -->
+  <view class="weui-panel">
+    <view class="weui-panel__hd text-df">商品详情</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-xl padding-bottom-sm">作品特色</view>
+          <view class="text-df">
+            <rich-text nodes="{{productInfo.feature}}"></rich-text>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-xl padding-bottom-sm">作者介绍</view>
+          <view class="text-df">
+            <rich-text nodes="{{productInfo.authorinfo}}"></rich-text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

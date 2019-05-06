@@ -1,0 +1,69 @@
+@import 'style/weui/weui.wxss';
+
+page {
+  background-color: #ffffff;
+  font-size: 16px;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.page__hd {
+  padding: 30rpx;
+}
+
+.page__bd {
+  padding-bottom: 60rpx;
+}
+
+.page__spacing {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.page__ft {
+  padding-bottom: 20rpx;
+  text-align: center;
+}
+
+.placeholder {
+  text-align: center;
+  background-color: #ebebeb;
+/*   background-color: #f8f8f8; */
+  color: #cfcfcf;
+}
+
+.page .weui-flex__item{
+  padding: 0 10rpx;
+}
+
+.head {
+  height: 6rem;
+}
+
+.head .placeholder {
+  line-height: 6rem;
+}
+
+.catelog {
+  height: 3rem;
+}
+
+.catelog .placeholder {
+  line-height: 3rem;
+}
+
+.content {
+  margin-top: 30rpx;
+  height: 100%;
+}
+
+.content .placeholder {
+  line-height: 17rem;
+}
+
+.footer {
+  height: 1rem;
+}
+
+.footer .placeholder {
+  line-height: 1rem;
+}

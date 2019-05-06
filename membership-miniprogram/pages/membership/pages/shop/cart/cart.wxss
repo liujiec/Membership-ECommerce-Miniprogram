@@ -1,0 +1,32 @@
+/* 商品缩略图样式 */
+.product_thumbnail_image {
+  width: 120rpx;
+  height: 120rpx;
+  vertical-align: text-top;
+}
+
+/* 文字删除线样式 */
+.line_through {
+  text-decoration: line-through;
+}
+
+/* 底部支付按钮样式 */
+.bottom_pay_button {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0px;
+  width: 100%;
+}
+
+button {
+  color: white;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  position: inherit;
+}
+
+button::after {
+  border: 0;
+}

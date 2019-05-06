@@ -1,0 +1,4 @@
+/* 设置每条同步记录的上下间隔 */
+.weui-form-preview{
+    margin: 25rpx 0;
+}

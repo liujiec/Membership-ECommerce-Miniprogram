@@ -1,0 +1,16 @@
+/* 实现发表笔记图标显示在navbar选项卡右侧的效果 */
+.weui-navbar {
+  border-bottom: 0;
+  width: 90%;
+}
+
+.weui-navbar__item {
+  padding: 8px 0;
+}
+
+
+.post_note_icon {
+  position: absolute;
+  width: 10%;
+  right: 0;
+}

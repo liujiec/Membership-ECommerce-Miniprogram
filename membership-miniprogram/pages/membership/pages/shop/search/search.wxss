@@ -1,0 +1,45 @@
+/* weui与colorui冲突的兼容性处理 */
+.weui-colorui-clear {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 7px 8px;
+  font-size: 0;
+}
+
+/* 修改weui搜索栏样式 */
+.weui-search-bar {
+  background-color: #fff;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.weui-search-bar__form {
+  background-color: #f8f8f8;
+}
+
+/* 搜索联想词实时展示样式 */
+.searchbar-result {
+  margin-top: 0;
+  font-size: 14px;
+}
+
+.searchbar-result:before {
+  display: none;
+}
+
+.weui-cell {
+  padding: 12px 15px 12px 35px;
+}
+
+/* 搜索标签样式 */
+.search_tags {
+  color: #576b95;
+}
+
+/* 瀑布流底部留白 */
+.water_flow {
+  padding-bottom: 20rpx;
+}
+
+

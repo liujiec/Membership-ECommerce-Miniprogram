@@ -1,0 +1,8 @@
+/* 实现swiper控件的图垂直居中显示 */
+swiper-item{
+  display: flex;
+}
+
+swiper-item image{
+  margin: auto;
+}

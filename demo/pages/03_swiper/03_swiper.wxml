@@ -1,0 +1,34 @@
+<view class="page">
+  <view class=" page__hd head">
+    <swiper class="head" indicator-dots="true">
+      <swiper-item>
+        <view class="placeholder head-image">幻灯片1</view>
+      </swiper-item>
+      <swiper-item>
+        <view class="placeholder head-image">幻灯片2</view>
+      </swiper-item>
+      <swiper-item>
+        <view class="placeholder head-image">幻灯片3</view>
+      </swiper-item>
+    </swiper>
+</view>
+<view class="page__bd page__spacing">
+  <view class="weui-flex catelog">
+    <view class="weui-flex__item">
+      <view class="placeholder">版块1</view>
+    </view>
+    <view class="weui-flex__item">
+      <view class="placeholder">版块2</view>
+    </view>
+    <view class="weui-flex__item">
+      <view class="placeholder">版块3</view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="placeholder">内容</view>
+  </view>
+</view>
+<view class="page__ft page__spacing footer">
+  <view class="placeholder">底部</view>
+</view>
+</view>

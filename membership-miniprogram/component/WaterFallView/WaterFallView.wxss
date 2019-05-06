@@ -1,0 +1,74 @@
+/* 瀑布流容器样式 */
+.fall-container {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+/* 左边一列的样式 */
+.fall-left {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+/* 右边一列的样式 */
+.fall-right {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20rpx;
+}
+
+/* 卡片样式 */
+.cards {
+  padding-top: 4rpx;
+  column-count: 2;
+  column-gap: 18rpx;
+}
+
+.cards .card {
+  display: inline-block;
+  margin-top: 20rpx;
+  background: #fff;
+  box-shadow: 0 0 10rpx 0 rgba(0, 0, 0, 0.10);
+  border-radius: 14rpx;
+  break-inside: avoid;
+  padding-bottom: 20rpx;
+  overflow: auto;
+}
+
+.cards .text {
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 20rpx;
+  width: 100%;
+}
+
+.cards .text .title {
+  font-weight: 600;
+  color: #353535;
+}
+
+.cards .text .desc {
+  max-width: 300rpx;
+  padding-top: 10rpx;
+  font-weight: 400;
+  color: #888;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.cards .text .price {
+  padding-top: 20rpx;
+  font-weight: 600;
+  color: #e64340;
+}
+
+.cards .text .date {
+  padding-top: 20rpx;
+}

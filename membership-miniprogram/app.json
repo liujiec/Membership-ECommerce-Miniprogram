@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/membership/pages/shop/index/index",
+    "pages/membership/pages/shop/product/product",
+    "pages/membership/pages/shop/search/search",
+    "pages/membership/pages/shop/cart/cart",
+    "pages/membership/pages/my/index/index",
+    "pages/membership/pages/my/order/order",
+    "pages/membership/pages/my/point/point",
+    "pages/membership/pages/my/level/level",
+    "pages/membership/pages/my/membershipcard/membershipcard",
+    "pages/membership/pages/my/walkingstepsync/walkingstepsync",
+    "pages/membership/pages/my/membershipplan/membershipplan",
+    "pages/membership/pages/community/index/index",
+    "pages/membership/pages/community/postnote/postnote",
+    "pages/membership/pages/community/note/note",
+    "pages/membership/pages/errorpage/errorpage",
+    "pages/membership/pages/userlockedpage/userlockedpage"
+  ],
+  "tabBar": {
+    "color": "#353535",
+    "selectedColor": "#09bb07",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/membership/pages/shop/index/index",
+        "iconPath": "image/icon_home.png",
+        "selectedIconPath": "image/icon_home_hl.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/membership/pages/community/index/index",
+        "iconPath": "image/icon_file.png",
+        "selectedIconPath": "image/icon_file_hl.png",
+        "text": "社区"
+      },
+      {
+        "pagePath": "pages/membership/pages/my/index/index",
+        "iconPath": "image/icon_user.png",
+        "selectedIconPath": "image/icon_user_hl.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "会员制电商",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

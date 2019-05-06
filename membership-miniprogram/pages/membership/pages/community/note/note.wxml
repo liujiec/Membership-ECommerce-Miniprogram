@@ -1,0 +1,46 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 当获取到笔记数据后，再显示页面-->
+<view wx:if="{{inited}}" class="bg-white">
+  <!-- 笔记图片 -->
+  <view class="text-center">
+    <swiper wx:if="{{noteInfo.images.length > 0}}" style="height: {{maxHeight + 50}}px;" indicator-dots="true" indicator-color="#888888" indicator-active-color="#353535">
+      <block wx:for="{{noteInfo.images}}" wx:key="item.url">
+        <swiper-item class="align-center">
+          <image mode="widthFix" src="{{item.url}}" width="{{item.width}}px" height="{{item.height}}px"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 笔记内容 -->
+  <view class="weui-article">
+    <view class="weui-article__section">
+      <!-- 笔记文字内容 -->
+      <view class="weui-article__p">
+        <text>{{noteInfo.content}}</text>
+      </view>
+      <view class="weui-article__p margin-lr">
+        <view class="weui-flex">
+          <!-- 笔记发表时间 -->
+          <view class="weui-flex__item">
+            {{noteInfo.date}}
+          </view>
+
+          <!-- 笔记点赞 -->
+          <view bindtap='onUpvoteClick' class="margin-right">
+            <text class="{{isUpvoted? 'icon-likefill':'icon-like'}} margin-right-xs"></text>
+            <text>{{noteInfo.upvoteNum}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 回到首页 -->
+  <view class="weui-footer padding-bottom">
+    <view class="weui-footer__links">
+      <navigator open-type="switchTab" url="../index/index" class="weui-footer__link">社区首页</navigator>
+    </view>
+  </view>
+</view>

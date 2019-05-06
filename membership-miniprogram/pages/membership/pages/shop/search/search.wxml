@@ -1,0 +1,65 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 搜索栏 -->
+<view class="weui-search-bar">
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" bindfocus="inputFocus" bindblur="inputBlur" bindinput="inputTyping" />
+      <view class="weui-colorui-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+        <icon type="clear" size="14"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="weui-search-bar__cancel-btn" bindtap="onClickSearchButton">搜索</view>
+</view>
+
+<!-- 搜索联想词实时展示 当用户正在搜索框输入内容 并且搜索框有输入内容时显示-->
+<view class="weui-cells searchbar-result" hidden="{{inputVal.length <= 0 || !inputFocused}}">
+  <block wx:for="{{suggestKeywords}}" wx:key="{{suggestKeyword.word}}" wx:for-item="suggestKeyword">
+    <view class="weui-cell" hover-class="weui-cell_active" id="{{ suggestKeyword.word }}" bindtap='onClickTags'>
+      <view>{{suggestKeyword.word}}</view>
+    </view>
+  </block>
+</view>
+
+<!-- 瀑布流展示商品搜索结果 当用户并未在搜索框输入内容 并且搜索框有输入内容时显示-->
+<view hidden="{{inputVal.length <= 0 || inputFocused}}">
+  <view class="water_flow">
+    <waterFallView id='waterFallView'>
+    </waterFallView>
+  </view>
+</view>
+
+<!-- 搜索框没有输入内容时显示 -->
+<view wx:if="{{inputVal.length <= 0}}">
+  <!-- 搜索历史记录 -->
+  <view class="weui-panel padding">
+    <view class="weui-panel__bd">
+      <view class="weui-flex">
+        <view class="weui-flex__item padding-bottom-sm">
+          <view class="text-lg">历史记录</view>
+        </view>
+        <view class="weui-flex__item text-right">
+          <text class="icon-delete" bindtap='clearSearchedKeywords'></text>
+        </view>
+      </view>
+      <view class="search_tags text-df">
+        <block wx:for="{{searchedKeywords}}" wx:key="{{hotSearchProducts}}" wx:for-item="keyword">
+          <view id="{{ keyword }}" class="fl padding-right-sm" bindtap='onClickTags'>{{ keyword }}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- 热门搜索 -->
+  <view class="weui-panel padding">
+    <view class="weui-panel__bd">
+      <view class="text-lg padding-bottom-sm">热门搜索</view>
+      <view class="search_tags text-df">
+        <block wx:for="{{hotSearchProducts}}" wx:key="{{hotSearchProducts}}" wx:for-item="keyword">
+          <view id="{{ keyword }}" class="fl padding-right-sm" bindtap='onClickTags'>{{ keyword }}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

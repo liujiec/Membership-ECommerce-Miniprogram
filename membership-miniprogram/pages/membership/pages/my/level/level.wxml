@@ -1,0 +1,146 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 当获取到用户数据后，再显示页面-->
+<view wx:if="{{inited}}">
+  <!--页面第一部分 当前等级 -->
+  <view class="padding bg-white">
+    <view class="weui-flex align-center">
+      <!-- 使用open-data显示用户头像昵称 -->
+      <view class="cu-avatar lg round bg-gray margin-right">
+        <open-data class="userAvatarUrl" type="userAvatarUrl"></open-data>
+      </view>
+      <view class="weui-flex__item">
+        <view>
+          <open-data type="userNickName"></open-data>
+        </view>
+      </view>
+
+      <!-- 显示用户等级图标及成长值 -->
+      <view class="cu-avatar sm round margin-right bg-white line-{{ myLevel.icon }} solids">
+        <text class="icon-medal"> </text>
+      </view>
+      <view class="text-xxl margin-right line-{{ myLevel.icon }}">
+        <text> {{myInfo.growthValue}} </text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面第二部分 -->
+  <view class="weui-panel">
+    <view class="weui-panel__bd">
+      <!-- 显示用户当前等级权益 -->
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-xl text-black padding-bottom-sm">
+            我的权益
+          </view>
+          <view class="weui-flex text-center">
+            <block wx:for="{{myLevel.bonus}}" wx:key=">this">
+              <view class="weui-flex__item">
+                <view class="cu-avatar xl round bg-white line-{{myLevel.icon}} solids">
+                  <text wx-if="{{item.desc.length > 0}}" class="avatar-text">{{item.desc}}</text>
+                  <view wx-if="{{item.desc.length <= 0}}" class="text-sl">
+                    <text class="icon-edit"></text>
+                  </view>
+                </view>
+                <view>{{item.name}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <!-- 显示用户等级升级说明 -->
+      <view wx:if="{{ growthValueToNextLevel > 0 }}" class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view>
+            还差
+            <text class="line-{{nextLevel.icon}}"> {{growthValueToNextLevel}} </text>成长值就能成为
+            <text class="line-{{nextLevel.icon}}"> {{nextLevel.title}}</text>，加油！
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面第三部分 -->
+  <view class="weui-panel">
+    <!-- 成长体系中的所有成长等级列表 使用scroll-view实现横向滚动 -->
+    <view class="weui-panel__hd">
+      <view class="text-xl text-black">
+        成长体系
+      </view>
+      <scroll-view scroll-x="true" scroll-into-view="{{myLevel.icon}}" class="level_list_container">
+        <block wx:for="{{levels}}" wx:for-item="level" wx:key="{{level.id}}">
+          <view id="{{level.icon}}" class="level_tab_item margin-sm" bindtap="onLevelItemClick" data-item="{{level}}">
+            <view class="cu-avatar {{ level.id == selectedId ? 'lg' : '' }} round bg-white line-{{ level.icon }} solids">
+              <text class="icon-medal"></text>
+            </view>
+            <view class="{{ level.id == selectedId ? 'text-xl text-black' : '' }}">{{level.title}}</view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+
+    <view class="weui-panel__bd">
+      <!-- 用户选中成长等级的成长值范围 -->
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="weui-flex">
+            <view class="weui-flex__item">成长值</view>
+            <view>
+              <text class="line-{{selectedLevel.icon}}">{{ selectedLevel.minGrowthValue }}{{ selectedLevel.maxGrowthValue >0 ? ' - ' + selectedLevel.maxGrowthValue : '+' }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 用户选中成长等级的等级权益 -->
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-xl text-black padding-bottom-sm">
+            等级权益
+          </view>
+          <view class="weui-flex text-center">
+            <block wx:for="{{selectedLevel.bonus}}" wx:key=">this">
+              <view class="weui-flex__item">
+                <view class="cu-avatar lg round bg-white line-{{selectedLevel.icon}} solids">
+                  <text wx-if="{{item.desc.length > 0}}" class="avatar-text">{{item.desc}}</text>
+                  <view wx-if="{{item.desc.length <= 0}}" class="text-xl">
+                    <text class="icon-edit"></text>
+                  </view>
+                </view>
+                <view></view>
+                <view>{{item.name}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <!-- 用户选中成长等级的升级说明 -->
+      <view wx:if="{{ selectedLevel.minGrowthValue - myInfo.growthValue > 0 }}" class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view>
+            还差
+            <text class="line-{{selectedLevel.icon}}"> {{selectedLevel.minGrowthValue - myInfo.growthValue}} </text>成长值就能成为
+            <text class="line-{{selectedLevel.icon}}"> {{selectedLevel.title}}</text>，加油！
+          </view>
+        </view>
+      </view>
+
+      <!-- 成长值获取规则说明 -->
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="text-xl text-black padding-bottom-sm">成长值获取规则</view>
+          <view>
+            <view>通过微信运动步数同步，积分换购，发表文章获得成长值，具体规则如下：</view>
+            <view>1. 微信运动每同步1步，获得1成长值</view>
+            <view>2. 积分购买商品，每消耗1积分，获得1成长值（不包含购买小M卡会员消耗的积分）</view>
+            <view>3. 每发表1篇笔记，获得1000成长值</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

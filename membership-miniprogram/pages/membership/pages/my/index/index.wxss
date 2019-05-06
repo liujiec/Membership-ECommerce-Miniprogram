@@ -1,0 +1,31 @@
+/*使用open-data显示用户微信头像默认为方形，需要设置为原型样式*/
+.userAvatarUrl {
+  overflow: hidden;
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 5000rpx;
+}
+
+/*定义购物车右上角红点样式*/
+.cart_badge{
+  position: relative;
+  width: 100rpx;
+  margin: 0 auto;
+}
+
+/* 实现发表笔记图标显示在navbar选项卡右侧的效果 */
+.weui-navbar {
+  border-bottom: 0;
+  width: 90%;
+}
+
+.weui-navbar__item {
+  padding: 8px 0;
+}
+
+.post_note_icon {
+  position: absolute;
+  width: 10%;
+  right: 0;
+}
+

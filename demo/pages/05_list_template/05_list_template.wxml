@@ -1,0 +1,38 @@
+<view class="page">
+  <view class=" page__hd head">
+    <view class="placeholder">头部图片</view>
+  </view>
+  <view class="page__bd page__spacing">
+    <view class="weui-flex catelog">
+      <view class="weui-flex__item">
+        <view class="placeholder">版块1</view>
+      </view>
+      <view class="weui-flex__item">
+        <view class="placeholder">版块2</view>
+      </view>
+      <view class="weui-flex__item">
+        <view class="placeholder">版块3</view>
+      </view>
+    </view>
+    <view class="content">
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+          <block wx:for="{{title_desc_array}}" wx:key="_id" wx:for-item="title_desc">
+            <view class="weui-media-box weui-media-box_text">
+              <view class="weui-media-box__title weui-media-box__title_in-text">{{title_desc.title}}</view>
+              <view class="weui-media-box__desc">{{title_desc.description}}</view>
+            </view>
+          </block>
+        </view>
+        <view class="weui-panel__ft" wx:if="{{is_no_more_data}}">
+          <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="page__ft page__spacing footer">
+    <view class="placeholder">底部</view>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+
+  {
+  id: 1,
+  title: "月卡会员",
+  listPrice: 20000,
+  price: 20000,
+  validity: 1
+  }
+  {
+  id: 2,
+  title: "季卡会员",
+  listPrice: 60000,
+  price: 57000,
+  validity: 3
+  }
+  {
+  id: 3,
+  title: "半年卡会员",
+  listPrice: 120000,
+  price: 108000,
+  validity: 6
+  }
+  {
+  id: 4,
+  title: "年卡会员",
+  listPrice: 240000,
+  price: 192000,
+  validity: 12
+  }    
+  {
+  id: 5,
+  title: "3年卡会员",
+  listPrice: 720000,
+  price: 468000,
+  validity: 36
+  }

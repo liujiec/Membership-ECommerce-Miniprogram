@@ -1,0 +1,33 @@
+/* 横向分类导航栏容器样式 */
+.category_tab_container {
+  width: 100%;
+  background-color: #ffffff;
+  white-space: nowrap;
+}
+
+/* 横向分类导航栏左右留白样式 */
+.category_tab_container_padd {
+  display: inline-block;
+  width: 24rpx;
+}
+
+/* 分类的样式 */
+.category_tab_item {
+  display: inline-block;   /* 需要设置display: inline-block，才能使微信官方的scroll-view控件实现水平滑动效果 */
+  line-height: 40rpx;
+  font-size: 14px;
+  color: #888;  
+  padding: 12rpx 32rpx;
+  margin-right: 8rpx;
+  margin-left: 8rpx;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 选中分类的样式 */
+.category_tab_item_selected {
+  color: #353535;
+  font-size: 14px;
+  font-weight: 600;
+}

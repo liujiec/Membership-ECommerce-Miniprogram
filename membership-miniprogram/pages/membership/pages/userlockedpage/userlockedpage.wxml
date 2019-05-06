@@ -1,0 +1,12 @@
+<!-- 用户被风控规则检测出异常后显示该页面 -->
+<view class="userlockedpage">
+  <view class="weui-msg">
+    <view class="weui-msg__icon-area">
+      <icon type="warn" size="93"></icon>
+    </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">账号异常</view>
+      <view class="weui-msg__desc">很抱歉，你的账号存在异常行为，已被限制访问</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,2 @@
+<!--learningdemo/pages/update_products/update_products.wxml-->
+<text>已上传{{index}}，总数{{total}}</text>

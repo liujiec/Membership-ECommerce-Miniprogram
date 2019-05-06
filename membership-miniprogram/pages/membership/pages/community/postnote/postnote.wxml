@@ -1,0 +1,41 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<view class="bg-white padding-lr-sm padding-top-sm">
+  <form bindsubmit="postFormSubmit">
+    <!-- 顶部操作按钮 -->
+    <view class="weui-flex padding-bottom-lg">
+      <view class="weui-flex__item text-left">
+        <navigator open-type='navigateBack'>取消</navigator>
+      </view>
+      <view class="weui-flex__item text-right">
+        <button form-type="submit" disabled='{{ imageList.length <=0 && inputLength <=0 }}' class="weui-btn mini-btn" type="primary" size="mini">发表</button>
+      </view>
+    </view>
+    <view class="margin-lr-sm">
+      <!-- 笔记文字输入框，最大输入1000字 -->
+      <view>
+        <textarea name="content" value="{{ textarea }}" bindinput='bindTextareaInput' maxlength="1000" auto-focus="true" auto-height="true" placeholder='说说此刻的想法...' />
+        <view class="weui-textarea-counter">{{ inputLength }}/1000</view>
+      </view>
+      <!-- 笔记图片选择，使用weui-uploader -->
+      <view class="weui-uploader">
+        <view class="weui-uploader__hd">
+          <view class="weui-uploader__title"></view>
+        </view>
+        <view class="weui-uploader__bd">
+          <view class="weui-uploader__files">
+            <block wx:for="{{imageList}}" wx:key="*this" wx:for-item="image">
+              <view class="weui-uploader__file">
+                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+              </view>
+            </block>
+          </view>
+          <view class="weui-uploader__input-box">
+            <view class="weui-uploader__input" bindtap="chooseImage"></view>
+          </view>
+        </view>
+        <view class="weui-uploader__info text-right">{{imageList.length}}/9</view>
+      </view>
+    </view>
+  </form>
+</view>

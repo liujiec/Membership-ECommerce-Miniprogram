@@ -1,0 +1,119 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 当获取到用户数据后，再显示页面 当显示积分支付结果时，隐藏主界面-->
+<view wx:if="{{inited && !showPaySuccess && !showPayFaild}}">
+  <!-- 页面第一部分 小M卡会员权益 -->
+  <view class="bg-white padding">
+    <view class="padding-bottom-sm">
+      小M卡会员特权：
+    </view>
+    <view class="weui-flex text-center">
+      <view class="weui-flex__item">
+        <view class="cu-avatar lg round bg-white line-red solids">
+          <text class="icon-pay line-red"></text>
+        </view>
+        <view>尊享折扣</view>
+      </view>
+      <view class="weui-flex__item">
+        <view class="cu-avatar lg round bg-white line-red solids">
+          <text class="icon-hot line-red"></text>
+        </view>
+        <view>积分加速</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面第二部分 小M卡会员套餐类型 使用scroll-view组件实现横向滚动 -->
+  <view class="weui-panel">
+    <view class="weui-panel__bd padding">
+      <view class="weui-flex align-center padding-bottom-sm ">
+        <view class="weui-flex__item">
+          开通服务
+        </view>
+        <view class="weui-badge weui-badge_space">M</view>
+        <view class="weui-badge_after">
+          小M卡会员
+        </view>
+      </view>
+      <scroll-view scroll-x="true" class="membership_plan_list_container">
+        <block wx:for="{{membershipPlans}}" wx:key="{{item.id}}">
+          <view class="membership_plan_tab_item {{ item.id == selectedId ? 'bg-gradual-red' : 'bg-white' }} radius shadow text-center text-df padding-sm margin-sm" bindtap="onPlanItemClick" data-item="{{item}}">
+            <view>{{item.title}}</view>
+            <view class="line_through">p{{item.listPrice}}</view>
+            <view class="text-xl text-bold {{ item.id == selectedId ? '' : 'text-red' }}">
+              <text class="text-sm">P</text>{{item.price}}
+            </view>
+            <view class="text-xs">相当于</view>
+            <view class="text-xs">p{{item.price/item.validity}}/月</view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 页面第三部分 用户成长等级享受的折扣 -->
+  <view wx:if="{{ discount>0 }}" class="weui-panel">
+    <view class="weui-panel__bd padding-lr padding-tb-sm">
+      用户等级
+      <view class="cu-avatar sm round bg-white line-{{ myLevel.icon }} solids margin-right-sm">
+        <text class="icon-medal"></text>
+      </view>
+      购买会员省
+      <text class="text-red">p{{ discount}}</text>
+    </view>
+  </view>
+
+  <!-- 页面第四部分 支付方式 -->
+  <view class="weui-panel">
+    <view class="weui-panel__bd padding-lr padding-tb-sm">
+      支付方式
+      <text class="icon-choiceness line-blue margin-left margin-right-xs"></text>积分支付
+    </view>
+  </view>
+
+  <!-- 页面第五部分 购买按钮 -->
+  <form class="bottom_pay_button bg-gradual-red text-center text-df " bindsubmit="onPayButtonClick" report-submit="true">
+    <button form-type="submit">
+      立即支付
+      <text class="text-sm margin-left-xs">P</text>{{price - discount}}
+    </button>
+  </form>
+</view>
+
+<!-- 支付成功提示界面 -->
+<view wx:if="{{showPaySuccess}}" class="weui-msg bg-white padding">
+  <view class="weui-msg__icon-area">
+    <icon type="success" size="93"></icon>
+  </view>
+  <view class="weui-msg__text-area">
+    <view class="weui-msg__title">支付成功</view>
+    <view class="weui-msg__desc">你已开通小M卡会员特权
+    </view>
+  </view>
+  <view class="weui-msg__opr-area">
+    <view class="weui-btn-area">
+      <navigator open-type='navigateBack' url="">
+        <button class="weui-btn" type="primary">返回</button>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 支付失败提示界面 -->
+<view wx:if="{{showPayFaild}}" class="weui-msg bg-white padding">
+  <view class="weui-msg__icon-area">
+    <icon type="warn" size="93"></icon>
+  </view>
+  <view class="weui-msg__text-area">
+    <view class="weui-msg__title">支付失败</view>
+    <view class="weui-msg__desc">如有疑问请联系客服
+    </view>
+  </view>
+  <view class="weui-msg__opr-area">
+    <view class="weui-btn-area">
+      <navigator open-type='navigateBack' url="">
+        <button class="weui-btn" type="primary">返回</button>
+      </navigator>
+    </view>
+  </view>
+</view>

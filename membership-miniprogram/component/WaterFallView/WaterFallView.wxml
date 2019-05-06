@@ -1,0 +1,62 @@
+<!-- 瀑布流显示内容 -->
+<view class='fall-container'>
+  <!-- 左边一列 -->
+  <view class='fall-left cards'>
+    <view style="width: {{ itemWidth }}px"></view>
+    <block wx:for="{{leftList}}" wx:key="{{item.index}}">
+      <!--瀑布流内容卡片-->
+      <template wx:if="{{ item.type == 'product' }}" is='productsCard' data="{{data:item}}" />
+      <template wx:if="{{ item.type == 'note' }}" is='noteCard' data="{{data:item}}" />
+    </block>
+  </view>
+  <!--右边一列 -->
+  <view class='fall-right cards'>
+    <view style="width: {{ itemWidth }}px"></view>
+    <block wx:for="{{rightList}}" wx:key="{{item.index}}">
+      <!--瀑布流内容卡片-->
+      <template wx:if="{{ item.type == 'product' }}" is='productsCard' data="{{data:item}}" />
+      <template wx:if="{{ item.type == 'note' }}" is='noteCard' data="{{data:item}}" />
+    </block>
+  </view>
+</view>
+
+<!--商品列表内容卡片模板-->
+<template name='productsCard'>
+  <view class="card">
+    <navigator url="../../shop/product/product?index={{data.index}}">
+      <image class='card-img' mode='aspectFill' style='width:{{data.itemWidth}}px;height:{{data.itemHeight}}px;' src='{{data.img}}' lazy-load>
+      </image>
+      <view class='text'>
+        <view class='title'>{{data.name}}</view>
+        <view class='desc'>
+          <rich-text nodes="{{data.desc}}"></rich-text>
+        </view>
+        <view class='price'>p{{data.price}}</view>
+      </view>
+    </navigator>
+  </view>
+</template>
+
+<!--笔记列表内容卡片模板-->
+<template name='noteCard'>
+  <view class="card">
+    <navigator url="../../community/note/note?index={{data.index}}">
+      <image class='card-img' mode='aspectFill' style='width:{{data.itemWidth}}px;height:{{data.itemHeight}}px;' src='{{data.img}}' lazy-load>
+      </image>
+      <view class='text'>
+        <view class='desc'>
+          <rich-text nodes="{{data.content}}"></rich-text>
+        </view>
+        <view class="weui-flex date">
+          <view class="weui-flex__item">
+            {{data.date}}
+          </view>
+          <view>
+            <text class="icon-like margin-right-xs"></text>
+            <text>{{data.upvoteNum}}</text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</template>

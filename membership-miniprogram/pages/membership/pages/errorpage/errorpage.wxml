@@ -1,0 +1,19 @@
+<!-- 访问云函数或云数据库失败、出错，显示该页面 -->
+<view class="errorpage">
+  <view class="weui-msg">
+    <view class="weui-msg__icon-area">
+      <icon type="warn" size="93"></icon>
+    </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">出错啦</view>
+      <view class="weui-msg__desc">哎呀，好像我抽风啦，请“返回”再试一下~~</view>
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <navigator open-type='navigateBack' url="">
+          <button class="weui-btn" type="primary">返回</button>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

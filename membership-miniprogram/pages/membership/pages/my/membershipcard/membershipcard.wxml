@@ -1,0 +1,91 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- 当获取到用户数据后，再显示页面-->
+<view wx:if="{{inited}}">
+  <!-- 页面第一部分 -->
+  <view class="padding-top-xl bg-white text-center">
+    <!-- 小M卡的会员卡样式 -->
+    <view class="bg-gradual-red shadow membership_card text-left padding-lg">
+      <navigator url="../../my/paymembership/paymembership">
+        <view class="weui-flex membership_card_title align-center">
+          <view class="weui-flex__item text-xl">
+            小M卡
+          </view>
+          <text class="text-xsl">M</text>
+        </view>
+        <view class="weui-flex membership_card_title membership_card_info align-center text-sm">
+          <view class="weui-flex__item ">
+            <view>亲爱的{{ isMembershipExpired ? ' ' : '小M卡会员 '}}
+              <open-data type="userNickName"></open-data>,</view>
+            <view>{{ isMembershipExpired ? ' 开通小M卡会员立享特权 ' : '会员有效期至：' + memberExpDate}}</view>
+          </view>
+          <text>{{ isMembershipExpired ? ' 马上开通 >' : ''}}</text>
+        </view>
+      </navigator>
+    </view>
+    <view class="margin-lr-lg padding-tb-lg">
+      <!-- 小M卡会员权益 -->
+      <view class="weui-flex">
+        <view class="weui-flex__item">
+          <view class="cu-avatar xl round bg-white line-red solids">
+            <text class="icon-pay line-red"></text>
+          </view>
+          <view>尊享折扣</view>
+        </view>
+        <view class="weui-flex__item">
+          <view class="cu-avatar xl round bg-white line-red solids">
+            <text class="icon-hot line-red"></text>
+          </view>
+          <view>积分加速</view>
+        </view>
+      </view>
+
+      <!-- 引导开通会员卡/续费 -->
+      <view class="margin-top-lg">
+        <navigator url="../../my/membershipplan/membershipplan">
+          <view class="round bg-gradual-red padding-xs text-xl membership_join_button">
+            <text>{{ isMembershipExpired ? '加入小M卡会员，立享特权 >' : '我要续费 >'}}</text>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面第二部分 小M卡会员权益详情 -->
+  <view class="weui-panel">
+    <view class="weui-panel__bd">
+      <!-- 小M卡会员权益一 -->
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="weui-flex">
+            <view class="weui-flex__item">
+              <view class="text-xl text-black padding-bottom-sm">权益一:尊享折扣</view>
+              <view>
+                <view class="text-df">积分消费独享7折</view>
+              </view>
+            </view>
+            <view class="cu-avatar xl round bg-white line-red solids">
+              <text class="avatar-text line-red">7折</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 小M卡会员权益二 -->
+      <view class="weui-cell weui-cell_hide_line">
+        <view class="weui-cell__bd">
+          <view class="weui-flex">
+            <view class="weui-flex__item">
+              <view class="text-xl text-black padding-bottom-sm">权益二:积分加速</view>
+              <view>
+                <view class="text-df">微信运动步数同步获得2倍积分</view>
+              </view>
+            </view>
+            <view class="cu-avatar xl round bg-white line-red solids">
+              <text class="avatar-text line-red">2倍</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "userLockCheck": "/component/userLockCheck/userLockCheck"
+  },
+  "navigationBarTitleText": "同步微信运动数据"
+}

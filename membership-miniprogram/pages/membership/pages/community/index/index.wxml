@@ -1,0 +1,27 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage-->
+<userLockCheck></userLockCheck>
+<!-- weui的navbar -->
+<view class="weui-tab">
+  <!-- navbar的选项卡 -->
+  <view class="weui-navbar bg-white">
+    <block wx:for="{{tabs}}" wx:key="*this">
+      <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="navBarTabClick">
+        <view class="weui-navbar__title">{{item}}</view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+  </view>
+
+  <!-- navbar选项卡右侧的发表笔记图标 -->
+  <view class="bg-white text-right padding-right-lg padding-tb-xs text-xl">
+    <navigator url="../postnote/postnote">
+      <text class="icon-camerafill"></text>
+    </navigator>
+  </view>
+  
+  <!-- 瀑布流展示笔记 -->
+  <view>
+    <waterFallView id='waterFallView'>
+    </waterFallView>
+  </view>
+</view>

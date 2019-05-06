@@ -1,0 +1,35 @@
+/* 横向会员套餐导航栏容器样式 */
+.membership_plan_list_container {
+  white-space: nowrap;
+}
+
+/* 套餐的样式 */
+.membership_plan_tab_item {
+  display: inline-block;
+  min-width: 200rpx;
+}
+
+/* 文字删除线样式 */
+.line_through {
+  text-decoration: line-through;
+}
+
+/* 底部支付按钮样式 */
+.bottom_pay_button {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0px;
+  width: 100%;
+}
+
+button {
+  color: white;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  position: inherit;
+}
+
+button::after {
+  border: 0;
+}

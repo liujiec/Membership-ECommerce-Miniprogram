@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "userLockCheck": "/component/userLockCheck/userLockCheck"
+  },
+  "navigationBarTitleText": "小M卡会员"
+}

@@ -1,0 +1,57 @@
+<!-- 如果用户被锁定， userLockCheck组件将自动跳转页面到userlockedpage -->
+<userLockCheck></userLockCheck>
+
+<!-- weui的navbar -->
+<view class="weui-tab">
+  <!-- navbar的选项卡 -->
+  <view class="weui-navbar">
+    <block wx:for="{{tabs}}" wx:key="*this">
+      <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+        <view class="weui-navbar__title">{{item}}</view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+  </view>
+
+  <!-- 列表显示积分变动记录 -->
+  <view class="weui-tab__panel">
+    <view class="weui-panel point_change">
+      <view class="weui-panel__bd">
+        <view class="weui-cells weui-cells_after-title">
+
+          <block wx:for="{{pointChangeRecords}}" wx:key="{{pointChange.index}}" wx:for-item="pointChange">
+            <!-- 一条积分变动数据 -->
+            <view class="weui-cell weui-cell_hide_line">
+              <view class="weui-cell__bd">
+                <view class="weui-flex">
+                  <!-- 积分变动原因与时间  -->
+                  <view class="weui-flex__item">
+                    <view>{{pointChange.operation}}</view>
+                    <view class="text-sm">{{pointChange.date}}</view>
+                  </view>
+
+                  <!-- 积分变动数值  -->
+                  <view class="align-center text-xxl">
+                    <view class="{{ pointChange.changePoints>0 ? 'text-red' : 'text-green' }}">
+                      {{pointChange.changePoints>0 ? "+" + pointChange.changePoints : pointChange.changePoints }}
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+
+        </view>
+      </view>
+
+      <!-- 数据全部加载完毕，底部提示 -->
+      <view class="weui-panel__ft" wx:if="{{isNoMoreData}}">
+        <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line"></view>
+          <view>没有更多数据</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
