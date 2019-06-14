@@ -7,7 +7,8 @@
     "pages/04_cloud_db/04_cloud_db",
     "pages/05_list_template/05_list_template",
     "pages/06_form/06_form",
-    "pages/07_form_submit/07_form_submit"
+    "pages/07_form_submit/07_form_submit",
+    "pages/08_auto_login/08_auto_login"
   ],
   "window": {
     "backgroundTextStyle": "light",

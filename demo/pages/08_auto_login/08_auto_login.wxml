@@ -1,0 +1,3 @@
+<!--demo/pages/08_auto_login/08_auto_login.wxml-->
+<view>当前用户的OpenID是：</view>
+<view>{{openid}}</view>

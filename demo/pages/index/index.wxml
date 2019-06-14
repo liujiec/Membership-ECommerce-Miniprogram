@@ -26,7 +26,11 @@
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
   <navigator url="/pages/07_form_submit/07_form_submit" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd">07 Form submit</view>
+    <view class="weui-cell__bd">07 Form Submit</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+  <navigator url="/pages/08_auto_login/08_auto_login" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">08 Auto Login</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
 </view>
