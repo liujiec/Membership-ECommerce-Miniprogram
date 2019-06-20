@@ -41,7 +41,7 @@ Page({
     var that = this
     //从数据库获取用订单列表信息
     orderService.getOrderList(
-      isTabChanged,
+      false,
       //处理数据库查询结果的回调函数
       function(orderArray) {
         if (orderArray.length > 0) {
