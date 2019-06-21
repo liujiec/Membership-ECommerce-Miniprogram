@@ -8,15 +8,14 @@ const db = cloud.database()
 const _ = db.command
 const MAX_LIMIT = 100
 
+
 // 云函数入口函数
 /**
  * 同步微信运动数据到用户积分与成长值，并返回积分变动数据
  * @param {data} 需要解密的数据
  * {
  *    data:{
- *      js_code,
- *      encryptedData,
- *      iv
+ *      weRunData,
  *    }
  *  }
  * @return {array} 积分变动数据 
@@ -26,23 +25,50 @@ const MAX_LIMIT = 100
  *    changePoints  //积分变动值
  * },]
  */
-exports.main = async(event, context) => {
-  var js_code = event.js_code
-  var encryptedData = event.encryptedData
-  var iv = event.iv
-  //调用云函数，解密数据
-  const weRunDecryptedData = await cloud.callFunction({
-    name: 'decryptData',
-    data: {
-      js_code: js_code,
-      encryptedData: encryptedData,
-      iv: iv
-    },
-  })
-  var weRunData = weRunDecryptedData.result.stepInfoList
-  await syncGrowthValue(weRunData)
-  return await syncPoint(weRunData)
+exports.main = async (event, context) => {
+  var weRunData = event.weRunData
+  await syncGrowthValue(weRunData.data.stepInfoList)
+  return await syncPoint(weRunData.data.stepInfoList)
 }
+
+
+//--------------------------------------使用 2.7.0 以下版本基础库时的旧版代码-------------------------//
+//--------------------------------------2.7.0 以下版本基础库不支持CloudId----------------------------//
+// // 云函数入口函数
+// /**
+//  * 同步微信运动数据到用户积分与成长值，并返回积分变动数据
+//  * @param {data} 需要解密的数据
+//  * {
+//  *    data:{
+//  *      js_code,
+//  *      encryptedData,
+//  *      iv
+//  *    }
+//  *  }
+//  * @return {array} 积分变动数据 
+//  * [{ 
+//  *    time,         //微信运动api返回值中的timestamp
+//  *    step,         //微信运动api返回值中的step
+//  *    changePoints  //积分变动值
+//  * },]
+//  */
+// exports.main = async(event, context) => {
+//   var js_code = event.js_code
+//   var encryptedData = event.encryptedData
+//   var iv = event.iv
+//   //调用云函数，解密数据
+//   const weRunDecryptedData = await cloud.callFunction({
+//     name: 'decryptData',
+//     data: {
+//       js_code: js_code,
+//       encryptedData: encryptedData,
+//       iv: iv
+//     },
+//   })
+//   var weRunData = weRunDecryptedData.result.stepInfoList
+//   await syncGrowthValue(weRunData)
+//   return await syncPoint(weRunData)
+// }
 
 /**
  * 同步微信运动数据并更新到积分数据库

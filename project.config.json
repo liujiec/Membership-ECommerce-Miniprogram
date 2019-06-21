@@ -10,7 +10,7 @@
 	},
 	"appid": "wx660ff554f0d7e435",
 	"projectname": "Membership-ECommerce-Platform",
-	"libVersion": "2.6.6",
+	"libVersion": "2.7.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
