@@ -29,7 +29,10 @@ exports.main = async (event, context) => {
 
   //首先获取所有积分记录
   // 先取出集合记录总数
-  const countResult = await db.collection('user_point').count()
+  const countResult = await db.collection('user_point').where({
+    _openid: event.openid,
+    changePoints: _.gte(0)
+  }).count()
   const total = countResult.total
   // 计算需分几次取
   const batchTimes = Math.ceil(total / MAX_LIMIT)

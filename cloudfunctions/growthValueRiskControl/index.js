@@ -44,13 +44,15 @@ const formatNumber = n => {
  *    data,    //bool true表示触发风控规则，用户账户锁定并记录风控日志 false表示正常
  * }
  */
-exports.main = async (event, context) => {
+exports.main = async(event, context) => {
 
   var result = false
 
   //首先获取所有成长值记录
   // 先取出集合记录总数
-  const countResult = await db.collection('user_growth_value').count()
+  const countResult = await db.collection('user_growth_value').where({
+    _openid: event.openid
+  }).count()
   const total = countResult.total
   // 计算需分几次取
   const batchTimes = Math.ceil(total / MAX_LIMIT)
@@ -72,7 +74,7 @@ exports.main = async (event, context) => {
   var addGrowthValueGroupedByDate = new Array()
   for (var i in allGrowthValueRecords.data) {
     var item = allGrowthValueRecords.data[i]
-    if (item.operation == "微信运动"){
+    if (item.operation == "微信运动") {
       var timestamp = item.timestamp
       if (addGrowthValueGroupedByDate[timestamp] !== undefined) {
         addGrowthValueGroupedByDate[timestamp] += item.changeGrowthValue

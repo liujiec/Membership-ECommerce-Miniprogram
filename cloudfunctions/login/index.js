@@ -7,11 +7,11 @@ cloud.init()
 
 // 云函数入口函数
 /**
- * 获取当前用户的OpenId、用户信息并自动注册
+ * 获取当前用户的OpenId、锁定标志并自动注册
  * @return {object} 用户信息
  * {
  *    openid, //当前用户的openid
- *    userInfo //当前用户的信息
+ *    isLocked //当前用户的锁定标志
  * }
  */
 exports.main = async(event, context) => {

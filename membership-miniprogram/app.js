@@ -29,7 +29,7 @@ App({
       }
     })
   },
-  //小程序全部变量
+  //小程序全局变量
   globalData: {
     openid: null,
     isLocked: null
