@@ -35,7 +35,8 @@ class ProductService {
     var productArray = []
 
     if (category === undefined || keyword === undefined) {
-      return productArray
+      typeof successCallback == "function" && successCallback(productArray)
+      return
     }
 
     if (isReset) {

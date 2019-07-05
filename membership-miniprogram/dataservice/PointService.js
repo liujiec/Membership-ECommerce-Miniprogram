@@ -37,7 +37,8 @@ class PointService {
     var pointChangeArray = []
 
     if (type === undefined) {
-      return pointChangeArray
+      typeof successCallback == "function" && successCallback(pointChangeArray)
+      return
     }
 
     if (isReset) {

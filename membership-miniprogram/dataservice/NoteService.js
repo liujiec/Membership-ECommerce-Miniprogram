@@ -42,7 +42,8 @@ class NoteService {
     var noteArray = []
 
     if (openId === undefined) {
-      return noteArray
+      typeof successCallback == "function" && successCallback(noteArray)
+      return
     }
 
     if (isReset) {

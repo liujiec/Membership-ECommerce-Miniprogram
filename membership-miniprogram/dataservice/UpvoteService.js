@@ -38,7 +38,8 @@ class UpvoteService {
     var upvoteArray = []
 
     if (userType != "author" && userType != "upvoter") {
-      return upvoteArray
+      typeof successCallback == "function" && successCallback(upvoteArray)
+      return
     }
 
     if (isReset) {
