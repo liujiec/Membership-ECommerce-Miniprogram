@@ -1,5 +1,5 @@
 // learningdemo/pages/update_products/update_products.js
-const productData = require("../../data/json_data.js")
+const productData = require("../../data/product_data.js")
 const db = wx.cloud.database()
 const _ = db.command
 

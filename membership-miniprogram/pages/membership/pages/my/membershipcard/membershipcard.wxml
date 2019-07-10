@@ -6,7 +6,7 @@
   <view class="padding-top-xl bg-white text-center">
     <!-- 小M卡的会员卡样式 -->
     <view class="bg-gradual-red shadow membership_card text-left padding-lg">
-      <navigator url="../../my/paymembership/paymembership">
+      <navigator url="../../my/membershipplan/membershipplan">
         <view class="weui-flex membership_card_title align-center">
           <view class="weui-flex__item text-xl">
             小M卡
