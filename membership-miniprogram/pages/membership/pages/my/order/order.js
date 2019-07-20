@@ -19,7 +19,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.getOrderList()
+    this.getOrderList(true)
   },
 
   /**
@@ -27,21 +27,21 @@ Page({
    */
   onReachBottom: function() {
     if (!this.data.isNoMoreData) { //如果还有数据未加载完，则获取更多数据
-      this.getOrderList()
+      this.getOrderList(false)
     }
   },
 
   /**
    * 从数据库获取订单列表
    */
-  getOrderList() {
+  getOrderList(isReset) {
     wx.showNavigationBarLoading() //在标题栏中显示加载
 
     var orders = this.data.orders
     var that = this
     //从数据库获取用订单列表信息
     orderService.getOrderList(
-      false,
+      isReset,
       //处理数据库查询结果的回调函数
       function(orderArray) {
         if (orderArray.length > 0) {
