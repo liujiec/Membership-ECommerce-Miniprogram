@@ -117,7 +117,7 @@ class NoteService {
   }
 
   /**
-   * 根据产品index列表获取笔记列表信息
+   * 根据笔记 ID 列表获取笔记列表信息
    * @method getNoteByIndex
    * @for NoteService
    * @param {string}} indexArray 笔记Id列表
@@ -182,7 +182,7 @@ class NoteService {
   }
 
   /**
-   * 根据产品index获取笔记信息
+   * 根据笔记 ID 获取笔记信息
    * @method getNoteByIndex
    * @for NoteService
    * @param {string}} index 笔记Id

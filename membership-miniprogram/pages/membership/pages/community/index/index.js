@@ -138,8 +138,7 @@ Page({
   getUpvotedNoteList(isPull) {
     var that = this
     //先分页获取我的点赞记录
-    upvoteService.getUpvoteList(
-      'upvoter',
+    upvoteService.getMyUpvoteList(
       isPull,
       function(upvoteArray) {
         var indexArray = []

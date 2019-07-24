@@ -2,7 +2,7 @@
 const db = wx.cloud.database()
 const _ = db.command
 //定义app用于获取全局变量中的用户openid
-const app = getApp() 
+const app = getApp()
 
 /**
  *点赞信息数据操作类
@@ -19,10 +19,9 @@ class UpvoteService {
   }
 
   /**
-   * 从数据库获取点赞列表信息
-   * @method getNoteList
+   * 从数据库获取用户点赞列表信息
+   * @method getMyUpvoteList
    * @for UpvoteService
-   * @param {string} userType 作者-author 点赞人-upvoter
    * @param {bool} isReset 是否清空分页缓存
    * @param {function} successCallback(upvoteArray) 处理数据查询结果的回调函数
    * upvoteArray数据结构：
@@ -34,13 +33,8 @@ class UpvoteService {
    *    autherOpenid
    * },]
    */
-  getUpvoteList(userType, isReset, successCallback) {
+  getMyUpvoteList(isReset, successCallback) {
     var upvoteArray = []
-
-    if (userType != "author" && userType != "upvoter") {
-      typeof successCallback == "function" && successCallback(upvoteArray)
-      return
-    }
 
     if (isReset) {
       //重置分页为初始值
@@ -48,18 +42,11 @@ class UpvoteService {
       this.pageCount = 8
     }
 
-    //构造查询条件
+    //构造根据点赞者 OpenId 查询的查询条件
     var query = db.collection('upvote')
-    //构造根据作者或点赞者查询
-    if (userType == "author") {
-      query = query.where({
-        autherOpenid: app.globalData.openid
-      })
-    } else if (userType == "upvoter") {
-      query = query.where({
+      .where({
         _openid: app.globalData.openid
       })
-    }
 
     //构造分页
     var offset = this.listIndex * this.pageCount
@@ -179,7 +166,7 @@ class UpvoteService {
   }
 
   /**
-   * 更新用户喜欢笔记的记录
+   * 更新用户点赞笔记的记录
    * @method updateUpvote
    * @for UpvoteService
    * @param {string} noteId 笔记id
