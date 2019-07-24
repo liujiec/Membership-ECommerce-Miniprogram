@@ -35,6 +35,7 @@ class NoteService {
    *     img,
    *     height,
    *     width,
+   *     upvoteNum,
    *     type
    * },]
    */
@@ -98,6 +99,7 @@ class NoteService {
               img: img,
               height: height,
               width: width,
+              upvoteNum: res.data[i].upvoteNum,
               type: 'note'
             })
           }
@@ -130,6 +132,7 @@ class NoteService {
    *     img,
    *     height,
    *     width,
+   *     upvoteNum,
    *     type
    * },]
    */
@@ -165,6 +168,7 @@ class NoteService {
               img: img,
               height: height,
               width: width,
+              upvoteNum: res.data[i].upvoteNum,
               type: 'note'
             })
           }
@@ -197,7 +201,8 @@ class NoteService {
    *     }],
    *     _openid,
    *     date,
-   *     content
+   *     content,
+   *     upvoteNum
    *   }
    */
   getNoteByIndex(index, successCallback) {

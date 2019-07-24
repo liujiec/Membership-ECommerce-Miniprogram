@@ -188,7 +188,22 @@ class UpvoteService {
           db.collection('upvote').doc(res.data[0]._id)
             .remove()
             .then(r => {
-              typeof successCallback == "function" && successCallback(false)
+              //笔记点赞数-1
+              db.collection('user_note').doc(noteId).update({
+                  data: {
+                    upvoteNum: _.inc(-1)
+                  }
+                })
+                .then(r => {
+                  typeof successCallback == "function" && successCallback(false)
+                })
+                .catch(err => {
+                  //跳转出错页面
+                  wx.redirectTo({
+                    url: '../../errorpage/errorpage'
+                  })
+                  console.error(err)
+                })
             })
             .catch(err => {
               //跳转出错页面
@@ -208,7 +223,22 @@ class UpvoteService {
               }
             })
             .then(r => {
-              typeof successCallback == "function" && successCallback(true)
+              //笔记点赞数+1
+              db.collection('user_note').doc(noteId).update({
+                  data: {
+                    upvoteNum: _.inc(1)
+                  }
+                })
+                .then(r => {
+                  typeof successCallback == "function" && successCallback(true)
+                })
+                .catch(err => {
+                  //跳转出错页面
+                  wx.redirectTo({
+                    url: '../../errorpage/errorpage'
+                  })
+                  console.error(err)
+                })
             })
             .catch(err => {
               //跳转出错页面

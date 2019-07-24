@@ -20,6 +20,21 @@ Page({
   },
 
   /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    //页面回到顶部
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    })
+    this.setData({
+      isNoMoreData: false, //重置数据全部加载完毕的标志
+    });
+    this.getProductList(true)
+  },
+
+  /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
@@ -47,7 +62,7 @@ Page({
       this.data.selectedCategory,
       "",
       isPull,
-      function (productArray) {
+      function(productArray) {
         that.fillData(isPull, productArray)
         if (productArray.length <= 0) {
           that.setData({

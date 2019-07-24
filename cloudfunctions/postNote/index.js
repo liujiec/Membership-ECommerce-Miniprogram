@@ -46,7 +46,8 @@ exports.main = async(event, context) => {
         _openid: wxContext.OPENID, //云函数添加数据不会自动插入openid，需要手动定义
         date: db.serverDate(),
         content: event.content,
-        images: event.images
+        images: event.images,
+        upvoteNum: 0
       }
     }))._id
   //添加成长值记录
