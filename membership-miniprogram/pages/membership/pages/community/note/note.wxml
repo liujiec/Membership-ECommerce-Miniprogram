@@ -7,7 +7,7 @@
     <swiper wx:if="{{noteInfo.images.length > 0}}" style="height: {{maxHeight + 50}}px;" indicator-dots="true" indicator-color="#888888" indicator-active-color="#353535">
       <block wx:for="{{noteInfo.images}}" wx:key="item.url">
         <swiper-item class="align-center">
-          <image mode="widthFix" src="{{item.url}}" width="{{item.width}}px" height="{{item.height}}px"></image>
+          <image mode="widthFix" src="{{item.url}}"  style="width: {{item.width}}px; height: {{item.height}}px;"></image>
         </swiper-item>
       </block>
     </swiper>

@@ -20,21 +20,27 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this
     noteService.getNoteByIndex(
       options.index, //笔记Id
-      function (noteInfo) {
+      function(noteInfo) {
         //修改页面标题为笔记内容
         wx.setNavigationBarTitle({
           title: noteInfo.content.substring(0, 20)
         })
         if (noteInfo.images.length > 0) {
-          //获取笔记所有图片的最大高度
+          var windowWidth = wx.getSystemInfoSync().windowWidth //获取手机屏幕的宽度信息
           var maxHeight = that.data.maxHeight
           for (var i in noteInfo.images) {
-            if (maxHeight < noteInfo.images[0].height) {
-              maxHeight = noteInfo.images[0].height
+            //图片的最大宽度为手机屏幕宽度，如果图片宽度大于手机屏幕宽度要等比例缩放图片高度与宽度
+            if (noteInfo.images[i].width > windowWidth) {
+              noteInfo.images[i].height = noteInfo.images[i].height * windowWidth / noteInfo.images[i].width
+              noteInfo.images[i].width = windowWidth
+            }
+            //获取笔记所有图片的最大高度
+            if (maxHeight < noteInfo.images[i].height) {
+              maxHeight = noteInfo.images[i].height
             }
           }
           that.setData({
@@ -44,7 +50,7 @@ Page({
         //获取用户是否已点赞笔记
         upvoteService.getMyUpvote(
           noteInfo._id,
-          function (isUpvoted) {
+          function(isUpvoted) {
             //设置笔记数据
             that.setData({
               noteInfo: noteInfo,
@@ -58,7 +64,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     //自定义笔记的转发内容，详见onShareAppMessage的官方说明文文档https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html
     if (this.data.noteInfo.images.length > 0) {
       return {
@@ -77,14 +83,14 @@ Page({
   /**
    * 用户点击点赞图标
    */
-  onUpvoteClick: function () {
+  onUpvoteClick: function() {
     var that = this
     var noteInfo = that.data.noteInfo
     //更新用户点赞行为到数据库
     upvoteService.updateUpvote(
       noteInfo._id,
       noteInfo._openid,
-      function (isUpvoted) {
+      function(isUpvoted) {
         //如果用户未点赞，则点赞数加一，并显示用户已点赞
         if (isUpvoted) {
           ++noteInfo.upvoteNum
