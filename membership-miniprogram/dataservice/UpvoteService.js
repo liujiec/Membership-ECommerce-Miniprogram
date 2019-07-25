@@ -85,33 +85,6 @@ class UpvoteService {
   }
 
   /**
-   * 从数据库获取笔记点赞数量
-   * @method getUpvoteNum
-   * @for UpvoteService
-   * @param {string} id 笔记id
-   * @param {function} successCallback(num) 处理数据查询结果的回调函数
-   * num: 点赞数字
-   */
-  getUpvoteNum(id, successCallback) {
-    //执行数据库查询
-    db.collection('upvote').where({
-        noteId: id
-      })
-      .count()
-      .then(res => {
-        //回调函数处理数据查询结果
-        typeof successCallback == "function" && successCallback(res.total)
-      })
-      .catch(err => {
-        //跳转出错页面
-        wx.redirectTo({
-          url: '../../errorpage/errorpage'
-        })
-        console.error(err)
-      })
-  }
-
-  /**
    * 从数据库获取我的笔记获得的点赞总数
    * @method getMyBeUpvotedNum
    * @for UpvoteService

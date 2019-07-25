@@ -148,6 +148,12 @@ Page({
    * 填充数据到瀑布流组件
    */
   fillData: function(isPull, items) {
+    if (items.length <= 0) {
+      this.setData({
+        isNoMoreData: true //设置数据全部加载完毕的标志
+      })
+    }
+    wx.hideNavigationBarLoading() //完成停止加载
     var view = this.selectComponent('#waterFallView');
     view.fillData(isPull, items);
   },
@@ -175,7 +181,7 @@ Page({
       app.globalData.openid,
       isPull,
       function(noteArray) {
-        that.getUpvoteNum(0, noteArray, isPull)
+        that.fillData(isPull, noteArray)
       })
   },
 
@@ -196,34 +202,8 @@ Page({
         noteService.getNotesByIndex(
           indexArray,
           function(noteArray) {
-            that.getUpvoteNum(0, noteArray, isPull)
+            that.fillData(isPull, noteArray)
           })
       })
   },
-
-  /**
-   * 获取笔记的点赞数
-   */
-  getUpvoteNum(index, noteArray, isPull) {
-    var that = this
-    if (index < noteArray.length) {
-      //如果没有获取noteArray中所有笔记的点赞数，继续获取笔记的点赞数
-      upvoteService.getUpvoteNum(
-        noteArray[index].index,
-        function(num) {
-          noteArray[index].upvoteNum = num
-            ++index
-          that.getUpvoteNum(index, noteArray, isPull)
-        })
-    } else {
-      //获取noteArray中所有笔记的点赞数后，瀑布流显示笔记列表
-      that.fillData(isPull, noteArray)
-      if (noteArray.length <= 0) {
-        that.setData({
-          isNoMoreData: true //设置数据全部加载完毕的标志
-        })
-      }
-      wx.hideNavigationBarLoading() //完成停止加载
-    }
-  }
 })

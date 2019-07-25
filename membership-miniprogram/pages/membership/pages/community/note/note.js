@@ -20,11 +20,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this
     noteService.getNoteByIndex(
       options.index, //笔记Id
-      function(noteInfo) {
+      function (noteInfo) {
         //修改页面标题为笔记内容
         wx.setNavigationBarTitle({
           title: noteInfo.content.substring(0, 20)
@@ -41,22 +41,16 @@ Page({
             maxHeight: maxHeight,
           })
         }
-        //获取笔记点赞数
-        upvoteService.getUpvoteNum(
+        //获取用户是否已点赞笔记
+        upvoteService.getMyUpvote(
           noteInfo._id,
-          function(num) {
-            noteInfo.upvoteNum = num
-            //获取用户是否已点赞笔记
-            upvoteService.getMyUpvote(
-              noteInfo._id,
-              function(isUpvoted) {
-                //设置笔记数据
-                that.setData({
-                  noteInfo: noteInfo,
-                  isUpvoted: isUpvoted,
-                  inited: true
-                })
-              })
+          function (isUpvoted) {
+            //设置笔记数据
+            that.setData({
+              noteInfo: noteInfo,
+              isUpvoted: isUpvoted,
+              inited: true
+            })
           })
       })
   },
@@ -64,7 +58,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     //自定义笔记的转发内容，详见onShareAppMessage的官方说明文文档https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html
     if (this.data.noteInfo.images.length > 0) {
       return {
@@ -83,18 +77,18 @@ Page({
   /**
    * 用户点击点赞图标
    */
-  onUpvoteClick: function() {
+  onUpvoteClick: function () {
     var that = this
     var noteInfo = that.data.noteInfo
     //更新用户点赞行为到数据库
     upvoteService.updateUpvote(
       noteInfo._id,
       noteInfo._openid,
-      function(isUpvoted) {
+      function (isUpvoted) {
         //如果用户未点赞，则点赞数加一，并显示用户已点赞
         if (isUpvoted) {
           ++noteInfo.upvoteNum
-        //如果用户已点赞，则点赞数减一，并显示用户未点赞
+          //如果用户已点赞，则点赞数减一，并显示用户未点赞
         } else {
           --noteInfo.upvoteNum
         }
