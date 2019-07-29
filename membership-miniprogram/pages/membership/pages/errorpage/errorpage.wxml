@@ -10,7 +10,7 @@
     </view>
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">
-        <navigator open-type='navigateBack' url="">
+        <navigator open-type="switchTab" url="../shop/index/index">
           <button class="weui-btn" type="primary">返回</button>
         </navigator>
       </view>
